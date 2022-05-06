@@ -14,11 +14,13 @@ import { ToastrService, ToastrModule } from 'ngx-toastr';
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+
     RouterModule.forChild([
     
-    {path:'sign-up', component:SignupComponent}
+    {path:'signup', component:SignupComponent}
 
     ])
+
   ],
   declarations: [LoginComponent, SignupComponent]
 })

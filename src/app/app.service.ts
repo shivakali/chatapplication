@@ -5,11 +5,11 @@ import { HttpClient, HttpErrorResponse, HttpClientModule } from '@angular/common
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs';        //import observable related code  
-import { CookieService } from 'ngx-cookie-service'; 
+import { Cookie } from 'ng2-cookies/ng2-cookies'; 
 
 import { catchError } from 'rxjs/operators';
 import { tap } from 'rxjs/operators';
-//import { toPromise } from 'rxjs/operators';
+//import  'rxjs/operators/toPromise';
 
 
 
@@ -31,7 +31,7 @@ export class AppServiceService {
     .set('mobile',data.mobile)
     .set('email',data.email)
     .set('password',data.password)
-    .set('apikey',data.apikey);
+    .set('apiKey',data.apiKey);
 
   return this.http.post(`${this.url}/api/v1/users/signup`, params);
 
@@ -53,16 +53,25 @@ return this.http.post(`${this.url}/api/v1/users/login`, params);
 public getUserInfofromLocalStorage = () =>{
 
 return JSON.parse(localStorage.getItem('userInfo'));
+
 }
 
 public setUserInfoInLocalStorage = (data) =>{
 
-  localStorage.setItem('userInfo', JSON.stringify(data));
+  localStorage.setItem('userInfo', JSON.stringify(data));     //java script object to string
 }
 
 
+public logout(): Observable<any> {
 
+  const params = new HttpParams()
+    .set('authToken', Cookie.get('authtoken'))
 
+  return this.http.post(`${this.url}/api/v1/users/logout`, params);
+
+} // end logout function
+
+ 
 
 
 

@@ -14,7 +14,7 @@ export class SignupComponent implements OnInit {
 
   public firstName: any;
   public lastName: any;
-  public Mobile: any;
+  public mobile: any;
   public email: any;
   public password: any;
   public apiKey: any;
@@ -37,13 +37,13 @@ this.router.navigate(['/']);
 
 }
 
-public signupFunction: any =() =>{
+public signupFunction: any =()        =>{
 
   if(!this.firstName){
 this.toastr.warning('Enter first name')
 } else if(!this.lastName){
 this.toastr.warning('Enter last name')
-}else if(!this.Mobile) {
+}else if(!this.mobile) {
   this.toastr.warning('Enter mobile')
 }else if(!this.email) {
   this.toastr.warning('Enter email')
@@ -56,7 +56,8 @@ this.toastr.warning('Enter last name')
    let data={
 
      firstName: this.firstName ,
-     Mobile: this.Mobile,
+     lastName:  this.lastName, 
+     Mobile: this.mobile,
      email: this.email,
      password: this.password,
      apiKey: this.apiKey,
@@ -95,12 +96,9 @@ this.toastr.warning('Enter last name')
     }
 
 
-   )
+   );
 
-}
+}   // end condition
 
-
-
-
-}
+}   // end signupFunction
 }

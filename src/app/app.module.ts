@@ -8,20 +8,25 @@ import { RouterModule, Routes} from '@angular/router';
 import { LoginComponent } from './user/login/login.component';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'; 
-import { CookieService } from 'ngx-cookie-service'; 
-
+//import { CookieService } from 'ngx-cookie-service'; 
+import {HttpClientModule } from '@angular/common/http';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 @NgModule({
   declarations: [
     AppComponent,
 
   ],
+
+
   imports: [
     BrowserModule,
     ChatModule,
     UserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    
     RouterModule.forRoot([
     {path:'login',component:LoginComponent,pathMatch:'full'},
     {path:'',redirectTo:'login',pathMatch:'full'},
@@ -29,6 +34,8 @@ import { CookieService } from 'ngx-cookie-service';
     {path:'**',component:LoginComponent}
     ])
   ],
+
+
   providers: [],
   bootstrap: [AppComponent]
 })

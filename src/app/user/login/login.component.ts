@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+  import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import {Router}  from '@angular/router';
 import { AppServiceService } from 'src/app/app.service';
-import { CookieService } from 'ngx-cookie-service'; 
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 
 @Component({
@@ -21,29 +21,28 @@ export class LoginComponent implements OnInit {
     public router: Router,
     private toastr:ToastrService ,
     public appService: AppServiceService,
-    public cookieService: CookieService
+    // public cookieService: CookieService
   ) {}
 
   ngOnInit() {
   }
 
 
-  public goToSignIn: any = () =>
+  public goToSignUp: any = () =>
   {
-  this.router.navigate(['/']);
+  this.router.navigate(['/signup']);
   
   }
 
-  public signupFunction: any =() =>{
+  public signinFunction: any =() =>{
 
     
   if(!this.email) {
     this.toastr.warning('Enter email')
   }else if(!this.password) {
     this.toastr.warning('Enter password')
-  }else if(!this.apiKey) {
-    this.toastr.warning('Enter api key')
-  } else {
+  }else 
+   {
   
      let data={
   
@@ -54,7 +53,7 @@ export class LoginComponent implements OnInit {
      }
      console.log(data)
   
-     this.appService.signupFunction(data).subscribe(
+     this.appService.signinFunction(data).subscribe(
   
       (apiResponse) => {
   
@@ -63,11 +62,11 @@ export class LoginComponent implements OnInit {
         if (apiResponse.status === 200) {
           console.log(apiResponse);
           
-          this.cookieService.set('authtoken', apiResponse.data.authToken);
+           Cookie.set('authtoken', apiResponse.data.authToken);
             
-          this.cookieService.set('receiverId', apiResponse.data.userDetails.userId);
+           Cookie.set('receiverId', apiResponse.data.userDetails.userId);
          
-          this.cookieService.set('receiverName', apiResponse.data.userDetails.firstName + ' ' + apiResponse.data.userDetails.lastName);
+           Cookie.set('receiverName', apiResponse.data.userDetails.firstName + ' ' + apiResponse.data.userDetails.lastName);
         
           this.appService.setUserInfoInLocalStorage(apiResponse.data.userDetails)
          
